@@ -12,6 +12,9 @@
         </svg>
     </button>
 
+    {{-- shown on small screens only --}}
+<h1 class="font-extrabold text-black  inline md:hidden">{{__("ap.appname")}}</h1>
+
         <div class="flex items-center md:order-2">
             <button type="button" data-dropdown-toggle="language-dropdown-menu"
                 class="inline-flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white">
@@ -43,11 +46,14 @@
                         <use xlink:href="#e" x="2470" />
                     </g>
                 </svg>
+                {{-- chosen language --}}
                 English (US)
             </button>
-            <!-- Dropdown -->
+            <!-- language Dropdown -->
             <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:bg-gray-700"
                 id="language-dropdown-menu">
+                <a href="hidden sm:inline md:hidden"> {{__("ap.appname")}}</a>
+                
                 <ul class="py-2 font-medium" role="none">
                     <li>
                         <a href="#"
@@ -123,43 +129,30 @@
             <ul
                 class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
-                    <a href="#"
+                    <a href="{{route('home')}}"
                         class="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
-                        aria-current="page">Home</a>
+                        aria-current="page">{{__("ap.home")}}</a>
                 </li>
-                <li>
-                    <a href="#"
-                        class="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">About</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">Services</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">Pricing</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">Contact</a>
-                </li>
+
                 <li>
                     <button id="mega-menu-full-dropdown-button" data-collapse-toggle="mega-menu-full-dropdown"
-                        class="flex w-full items-center justify-between rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-blue-500 md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-600 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">Company
+                        class="flex w-full items-center justify-between rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-blue-500 md:w-auto md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-600 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">
+                        {{__("ap.lessons")}}
                         <svg class="ml-2.5 h-2.5 w-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg></button>
                 </li>
+                <li>
+                    <a href="{{route('about')}}"
+                        class="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500">About</a>
+                </li>
 
             </ul>
         </div>
     </div>
-
-
     {{-- this is mega menu drop down for links and website sections --}}
-
     <div id="mega-menu-full-dropdown"
         class="mt-1 hidden border-y border-gray-200 bg-gray-50 shadow-sm dark:border-gray-600 dark:bg-gray-800 md:bg-white">
         <div class="mx-auto grid max-w-screen-xl px-4 py-5 text-gray-900 dark:text-white sm:grid-cols-2 md:px-6">
@@ -171,36 +164,9 @@
                             you're already using.</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#" class="block rounded-lg p-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="font-semibold">Segmentation</div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Connect with third-party tools that
-                            you're already using.</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="block rounded-lg p-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="font-semibold">Marketing CRM</div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Connect with third-party tools that
-                            you're already using.</span>
-                    </a>
-                </li>
+                
             </ul>
-            <ul>
-                <li>
-                    <a href="#" class="block rounded-lg p-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="font-semibold">Online Stores</div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Connect with third-party tools that
-                            you're already using.</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="block rounded-lg p-3 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <div class="font-semibold">Segmentation</div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">Connect with third-party tools that
-                            you're already using.</span>
-                    </a>
-                </li>
+            <ul>    
                 <li>
                     <a href="#" class="block rounded-lg p-3 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <div class="font-semibold">Marketing CRM</div>

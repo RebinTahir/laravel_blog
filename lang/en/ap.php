@@ -1,6 +1,6 @@
 <?php 
 return [
-    "appname"=>"Blue Tech",
+    "appname"=>"How To Tech",
     
     // menu section
     "menu"=>"Menu",
@@ -24,5 +24,10 @@ return [
     With full gurenty of sotware operations and security ",
     "providetechnology"=>"We Provide Technology In ",
     "blueworld"=>"Blue World ",
+
+// sidebars
+"lessons"=>"Lesson's",
+"mainsubjects"=>"Main Subjects",
+
 
 ];
