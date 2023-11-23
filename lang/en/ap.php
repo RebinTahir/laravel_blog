@@ -28,6 +28,20 @@ return [
 // sidebars
 "lessons"=>"Lesson's",
 "mainsubjects"=>"Main Subjects",
+"loadmore"=>"Loan More ...",
+"datanotfound"=>"Sorry Data Not Found",
+"suggestedposts"=>"Suggested Popular Posts",
+"titleen"=>"Title En",
+"titlekr"=>"Title Kr",
+"titlear"=>"Title Ar",
+
+"bodyen"=>"Body En",
+"bodykr"=>"Body Kr",
+"bodyar"=>"Body Ar",
+
+"youtube"=>"Youtube",
+"img"=>"img",
+
 
 
 ];

@@ -27,7 +27,13 @@
 
 </div>
 
+<script>
 
+// load more news  
+function loadmorenews(){
+alert("we are workig on it");
+}
+</script>
 
 
     </body>

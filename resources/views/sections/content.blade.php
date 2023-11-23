@@ -29,11 +29,10 @@
 
 <div class="flex flex-col gap-2">
 
-@for ($i=0;$i < 20 ; $i++ )
-    
-<div class="w-fit rounded-lg bg-gray-300 p-5">
+{{-- 
+    <div class="w-fit rounded-lg bg-gray-300 p-5">
     <div>
-        <a href="" class="font-semibold text-black hover:text-blue-500 hover:underline">
+        <a href="{{route('information', $i )}}" class="font-semibold text-black hover:text-blue-500 hover:underline">
             Laravel version 10 is here
         </a>
     </div>
@@ -42,24 +41,37 @@
 
             Laravel Website announse a new version of laravel 10.0 that come with huge
             support 
-            Laravel Website announse a new version of laravel 10.0 that come with huge
-            support 
-            Laravel Website announse a new version of laravel 10.0 that come with huge
-            support 
-            Laravel Website announse a new version of laravel 10.0 that come with huge
-            support 
-            Laravel Website announse a new version of laravel 10.0 that come with huge
-            support 
-            Laravel Website announse a new version of laravel 10.0 that come with huge
-            support 
-        
+               
         </p>
         </div>
     </div>
+    --}}
+
+
+
+@foreach (App\Models\Post::limit(10)->get() as $post)
     
-    @endfor
+{{-- this is post body --}}
+<article class="max-w-xs">
+    
+    @if (!is_null($post->img))
+    <img src="{{$post->img}}" class="mb-5 rounded-lg" alt="Image 2">
+        
+    @endif
+        <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">{{$post->title}}</h2>
+    <p class="mb-4 text-gray-500 dark:text-gray-400 text-clip">{{$post->body}}</p>
+</article>
+    
+    @endforeach
+
+
 
 
     
+    <div class="p-5 bg-amber-300 text-black text-center rounded-lg hover:bg-blue-500 hover:text-white  " >
+        <button onclick="loadmorenews()" class="w-full h-full">{{__("ap.loadmore")}}</button>
+
+    </div>
+
 
 </div>

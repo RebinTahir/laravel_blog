@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,9 +22,11 @@ Route::get('/about', function () {
     return view('about');
 })->name("about");
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/information/{id}', [PostController::class,"showpost"] )->name("information");
+Route::post('/newpost', [PostController::class,"savepost"] )->name("newpost");
+Route::post('/deletepost', [PostController::class,"deletepost"] )->name("deletepost");
+
+Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,9 +1,10 @@
 
-<footer class="bg-gray-800  dark:bg-green-500 text-white dark:text-black">
-    <h1 class="w-full bg-amber-400 text-black font-extrabold p-5 text-center " >  {{__("ap.appname")}}</h1>
-    
+<footer class="bg-gray-800 justify-center  dark:bg-green-500 text-white w-full dark:text-black">
+ 
     <div class="mx-auto w-full max-w-screen-xl">
-      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+
+
+      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
         <div>
             <h2 class="mb-6 text-sm font-semibold  uppercase underline">Menu</h2>
             <ul class=" font-medium">
@@ -18,6 +19,7 @@
                 </li>
             </ul>
         </div>
+
         <div>
             <h2 class="mb-6 text-sm font-semibold  uppercase underline">Social Media</h2>
             <ul class=" font-medium">
@@ -29,13 +31,13 @@
                 </li>
             </ul>
         </div>
+        
         <div>
             <h2 class="mb-6 text-sm font-semibold  uppercase underline">Legal</h2>
             <ul class=" font-medium">
                 <li class="mb-4">
                     <a href="#" class="hover:underline">Privacy Policy</a>
-                </li>
-             
+                </li>             
                 <li class="mb-4">
                     <a href="#" class="hover:underline">Terms &amp; Conditions</a>
                 </li>
@@ -43,6 +45,8 @@
         </div>
       
     </div>
+
+    {{-- small buttom information bar --}}
     <div class="px-4 py-6 bg-gray-800  dark:bg-green-500 text-white dark:text-black md:flex md:items-center md:justify-between">
         <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://flowbite.com/">Flowbite™</a>. All Rights Reserved.
         </span>
