@@ -23,8 +23,9 @@ Route::get('/about', function () {
 })->name("about");
 
 Route::get('/information/{id}', [PostController::class,"showpost"] )->name("information");
-Route::post('/newpost', [PostController::class,"savepost"] )->name("newpost");
-Route::post('/deletepost', [PostController::class,"deletepost"] )->name("deletepost");
+Route::post('/newpost', [PostController::class,"savepost"] )->middleware("auth")->name("newpost");
+Route::post('/deletepost', [PostController::class,"deletepost"] )->middleware("auth")->name("deletepost");
+Route::post('/getposts', [PostController::class,"getposts"] )->middleware("auth")->name("getposts");
 
 Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 

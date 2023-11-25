@@ -19,16 +19,28 @@ return view("sections.subject");
 
     // save post
 public function savepost(Request $request){
-    $path="null";
+    $path=null;
     if ($request->hasFile('image') && request("img") != null ) {
            $location = '/images';
             if ($request->file('image')->isValid()) {
                             $path = $request->file('image')->store($location, 'public');
                         }
                     }    
-    $post = new Post();
     
-    $post->img = $path;
+    
+                    if(request("update") && request("id") > 0 ){
+        $post = Post::find(request("id"));
+    }else{
+        $post = new Post();
+    }
+    
+
+    if(!is_null($path)){
+        $post->img = $path;
+
+    }
+
+
     $post->title_en = request("titleen");
     $post->title_kr = request("titlekr");
     $post->title_ar = request("titlear");
@@ -37,17 +49,24 @@ public function savepost(Request $request){
     $post->body_kr = request("bodykr");
     $post->body_ar = request("bodyar");
     
-    
     $post->youtube = request("youtube");
     $post->note = request("note");
 
    if($post->save()){
-
        return [true,true];
     } else{
        return [false,false];
 
    }
+
+}
+
+// to get posts based on dates
+public function getposts()  {
+    $sdate = request("sdate");
+    $edate = request("edate");
+    $posts = Post::whereBetween("created_at",[$sdate,$edate])->get();
+    return $posts;
 
 }
 

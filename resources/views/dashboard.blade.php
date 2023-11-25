@@ -47,6 +47,23 @@
                 <button onclick="newpost()" class="bg-blue-500 p-5 hover:bg-green-500 rounded-lg hover:text-white">Submit</button>
             </div>
             <div class="col-span-4">
+<div class="flex gap-2">
+
+    <div class="flex flex-col">
+        <label for="sdate">start date</label>
+        <input type="date" id="sdate" class="p-2 rounded-lg lg" />
+    </div>
+
+    <div class="flex flex-col">
+        <label for="edate">end date</label>
+        <input type="date" id="edate" class="p-2 rounded-lg lg" />
+    </div>
+
+    <button onclick="postdtb()" class="p-3 bg-blue-500 rounded-lg">load data</button>
+
+
+</div>
+
                 <table id="posttable">
                     <thead>
                         <tr>
@@ -78,7 +95,9 @@
 
         </div>
 
-
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+        
         <script>
             // create new post
             function newpost() {
@@ -93,6 +112,8 @@
                 data.append("bodykr", $("#bodykr").val());
                 data.append("bodyar", $("#bodyar").val());
                 data.append("youtube", $("#youtube").val());
+                data.append("update", false);
+                data.append("id", 0);
                 data.append("note", $("#note").val());
 
                 if ($('#img')[0].files[0] == undefined) {
@@ -102,20 +123,10 @@
                     data.append("img", files);
                 }
 
-                fd.append('img', files);
-                fd.append('titleen', jQuery('#titleen').val());
-                fd.append('titlear', jQuery('#titlear').val());
-                fd.append('titlekr', jQuery('#titlekr').val());
-
-                fd.append('bodyen', jQuery('#bodyen').val());
-                fd.append('bodyar', jQuery('#bodyar').val());
-                fd.append('bodykr', jQuery('#bodykr').val());
-                fd.append('youtube', jQuery('#youtube').val());
-
                 $.ajax({
                     url: "{{ route('newpost') }}",
                     type: 'post',
-                    data: fd,
+                    data: data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
@@ -129,8 +140,68 @@
             }
 
 // datatable for posts 
-function postdtb() { 
+var dtb=undefined;
 
+function postdtb() { 
+if(dtb == undefined){
+dtb = new DataTable("#posttable",{
+    ajax:{
+        url:"{{route('getposts')}}",
+        data:{"sdate":$("#sdate").val(),"edate":$("#edate").val() }
+    },
+    columns: [
+        {
+            data: '#',
+            render:function(data,type,row){return data.meta + 1 ;  }},
+        {data: 'title_en',render:function(data,type,row) {
+            return `<input type='text' value='${data.title_en}' id='titleen${row.id}' />`;
+        }},
+        {data: 'title_ar',render:function(data,type,row) {
+            return `<input type='text' value='${data.title_ar}' id='titlear${row.id}' />`;
+        }},
+        {data: 'title_kr',render:function(data,type,row) {
+            return `<input type='text' value='${data.title_kr}' id='titlekr${row.id}' />`;
+        }},
+        
+        
+        {data: 'body_en',render:function(data,type,row) {
+            return `<input type='text' value='${data.body_en}' id='bodyen${row.id}' />`;
+        }},
+        {data: 'body_ar',render:function(data,type,row) {
+            return `<input type='text' value='${data.body_ar}' id='bodyar${row.id}' />`;
+        }},
+        {data: 'body_kr',render:function(data,type,row) {
+            return `<input type='text' value='${data.body_kr}' id='bodykr${row.id}' />`;
+        }},
+        
+  
+
+
+        {data: 'extralink',render:function(data,type,row){return `<input type='text' value='${data.extralink}' id='extralink${row.id}'  />`;}},
+        {data: 'youtube',render:function(data,type,row){return `<input type='text' value='${data.youtube}' id='youtube${row.id}'  />`;}},
+        
+        {data: 'note',render:function(data,type,row){return `<input type='text' value='${data.note}' id='note${row.id}'  />`;}},
+        
+        {data: 'img',render:function(){return `<input type='file'  id='img${row.id}' />`;}},
+        
+        {data: 'action',render:function (data,type,row) {
+            return `<div> 
+                <button onclick="updatepost('${row.id}')" class='p-3 bg-blue-500 hover:bg-green-500 rounded-lg'> update </button> 
+                <button onclick="deletepost('${row.id}')" class='p-3 bg-red-500 hover:text-white-500 rounded-lg'> delete </button> 
+                  </div>`;
+        }},
+        
+
+
+
+
+    ]
+});
+
+}else{
+dtb.ajax.reload();
+
+}
 
  }
 
@@ -146,6 +217,45 @@ $.post("{{route('deletepost')}}",{"id":id},(data)=> {
     }
 });
     
+}
+
+function updatepost(id){
+    
+    let data = new FormData();
+                let files = $(`#img${id}`)[0].files[0];
+
+                data.append("titleen", $(`#titleen${id}`).val());
+                data.append("titlekr", $(`#titlekr${id}`).val());
+                data.append("titlear", $(`#titlear${id}`).val());
+                data.append("bodyen", $(`#bodyen${id}`).val());
+                data.append("bodykr", $(`#bodykr${id}`).val());
+                data.append("bodyar", $(`#bodyar${id}`).val());
+                data.append("youtube", $(`#youtube${id}`).val());
+                data.append("update", true);
+                data.append("id", id);
+                data.append("note", $(`#note${id}`).val());
+
+                if ($(`#img${id}`)[0].files[0] == undefined) {
+                    // no img provided
+                    data.append("img", null);
+                } else {
+                    data.append("img", files);
+                }
+
+                $.ajax({
+                    url: "{{ route('newpost') }}",
+                    type: 'post',
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        if (response[1]) {
+                            alert("success");
+                        } else {
+                            alert('failed');
+                        }
+                    },
+                });
 }
 
         </script>
