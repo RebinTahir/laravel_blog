@@ -65,8 +65,9 @@ public function savepost(Request $request){
 public function getposts()  {
     $sdate = request("sdate");
     $edate = request("edate");
-    $posts = Post::whereBetween("created_at",[$sdate,$edate])->get();
-    return $posts;
+    $posts = Post::whereBetween("created_at",[$sdate,$edate]);
+ 
+ return \Yajra\DataTables\DataTables::of($posts)->make(true);
 
 }
 

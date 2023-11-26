@@ -18,16 +18,16 @@ return new class extends Migration
             $table->string("title_kr");
             
             
-            $table->string("body1_en");
-            $table->string("body1_ar");
-            $table->string("body1_kr");
+            $table->string("body_en");
+            $table->string("body_ar");
+            $table->string("body_kr");
             
             $table->string("img")->nullable();
             
-            $table->string("extralink");
-
-            $table->string("youtube");
-
+            $table->string("youtube")->nullable();
+            $table->string("note")->nullable();
+            
+            $table->string("extralink")->nullable();
 
 
 

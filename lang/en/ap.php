@@ -41,6 +41,10 @@ return [
 
 "youtube"=>"Youtube",
 "img"=>"img",
+"note"=>"note",
+"newposttitle"=>"create new post!",
+"newpostinsert"=>"Would you like to insert create this Post ?",
+"extralink"=>"Extra link",
 
 
 

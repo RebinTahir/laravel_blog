@@ -5,12 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-   
+        <title>{{ config('app.name', __("ap.appname")) }}</title>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <script src="{{asset('jquery/dist/jquery.js')}}"></script>
+        <script src="{{asset('datatables.net/js/jquery.dataTables.js')}}"></script>
+        <script src="{{asset('jquery-confirm/dist/jquery-confirm.min.js')}}"></script>
+        
+<link rel="stylesheet" href="{{asset('jquery-confirm/dist/jquery-confirm.min.css')}}">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -30,5 +33,19 @@
                 {{ $slot }}
             </main>
         </div>
+
+<script>
+
+$(document).ready(function() {
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+});
+
+
+</script>
+
     </body>
 </html>

@@ -6,87 +6,84 @@
     </x-slot>
     <div class="py-12">
         {{-- form --}}
-        <div class="grid grid-cols-5 gap-3 px-5">
-            <div class="col-span-1 flex flex-col gap-2">
+        <div class="grid grid-cols-6 gap-3 px-5">
+            <div class="col-span-1 flex flex-col gap-2 px-5">
                 <div class="flex flex-col gap-2">
                     <label for="titleen">En Title</label>
-                    <input type="text" id="titleen" />
+                    <input class="rounded-lg p-2" type="text" id="titleen" />
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="titlear">Ar Title</label>
-                    <input type="text" id="titlear" />
+                    <input class="rounded-lg p-2" type="text" id="titlear" />
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="titlekr">Kr Title</label>
-                    <input type="text" id="titlekr" />
+                    <input class="rounded-lg p-2" type="text" id="titlekr" />
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="bodyen">En Body</label>
-                    <input type="text" id="bodyen" />
+                    <textarea class="rounded-lg p-2" type="text" id="bodyen"></textarea>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="bodyar">Ar Body</label>
-                    <input type="text" id="bodyar" />
+                    <textarea class="rounded-lg p-2" type="text" id="bodyar"></textarea>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="bodykr">Kr Body</label>
-                    <input type="text" id="bodykr" />
+                    <textarea class="rounded-lg p-2" type="text" id="bodykr"></textarea>
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="img">img</label>
-                    <input type="file" id="img" />
+                    <input class="rounded-lg p-2" type="file" id="img" />
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="youtube">Youtube</label>
-                    <input type="text" id="youtube" />
+                    <input class="rounded-lg p-2" type="text" id="youtube" />
                 </div>
                 <div class="flex flex-col gap-2">
                     <label for="note">note</label>
-                    <textarea id="note" col="5"></textarea>
+                    <textarea id="note" col="5" class="rounded-lg"></textarea>
                 </div>
-                <button onclick="newpost()" class="bg-blue-500 p-5 hover:bg-green-500 rounded-lg hover:text-white">Submit</button>
+                <button onclick="newpost()"
+                    class="rounded-lg bg-blue-500 p-5 hover:bg-green-500 hover:text-white">Submit</button>
             </div>
-            <div class="col-span-4">
-<div class="flex gap-2">
+            <div class="col-span-5 bg-gray-300 p-5">
+                <div class="mb-2 flex gap-2">
 
-    <div class="flex flex-col">
-        <label for="sdate">start date</label>
-        <input type="date" id="sdate" class="p-2 rounded-lg lg" />
-    </div>
+                    <div class="flex flex-col">
+                        <label for="sdate">start date</label>
+                        <input type="date" id="sdate" class="lg rounded-lg p-2" />
+                    </div>
 
-    <div class="flex flex-col">
-        <label for="edate">end date</label>
-        <input type="date" id="edate" class="p-2 rounded-lg lg" />
-    </div>
+                    <div class="flex flex-col">
+                        <label for="edate">end date</label>
+                        <input type="date" id="edate" class="lg rounded-lg p-2" />
+                    </div>
 
-    <button onclick="postdtb()" class="p-3 bg-blue-500 rounded-lg">load data</button>
+                    <button onclick="postdtb()"
+                        class="rounded-lg bg-blue-500 p-2 hover:bg-green-500 hover:text-white">load data</button>
 
 
-</div>
+                </div>
 
-                <table id="posttable">
-                    <thead>
+                <table id="posttable" class="cell-border compact stripe">
+                    <thead class="bg-slate-400 p-5">
                         <tr>
                             <th>#</th>
                             <th>{{ __('ap.titleen') }}</th>
                             <th>{{ __('ap.titlear') }}</th>
                             <th>{{ __('ap.titlekr') }}</th>
-
                             <th>{{ __('ap.bodyen') }}</th>
                             <th>{{ __('ap.bodyar') }}</th>
                             <th>{{ __('ap.bodykr') }}</th>
-
+                            <th>{{ __('ap.extralink') }}</th>
                             <th>{{ __('ap.youtube') }}</th>
-
                             <th>{{ __('ap.img') }}</th>
-
+                            <th>{{ __('ap.note') }}</th>
                             <th>#</th>
-
-
-
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class="bg-slate-400 p-3"></tbody>
 
                 </table>
 
@@ -95,7 +92,7 @@
 
         </div>
 
-       
+
         <script>
             // create new post
             function newpost() {
@@ -121,6 +118,13 @@
                     data.append("img", files);
                 }
 
+                $.confirm({
+        title: "{{__('ap.newposttitle')}}",
+        content: "{{__('ap.newpostinsert')}}",
+        useBootstrap: false,
+        buttons: {
+            confirm: function () {
+                                       
                 $.ajax({
                     url: "{{ route('newpost') }}",
                     type: 'post',
@@ -129,97 +133,197 @@
                     processData: false,
                     success: function(response) {
                         if (response[1]) {
-                            alert("success");
+                            $.alert({
+    title: 'Operation Alert !',
+    content: 'Success!',
+});
                         } else {
-                            alert('failed');
+                            $.alert({
+    title: 'Operation Alert !',
+    content: 'Failed!',
+});
                         }
                     },
                 });
+
+
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            },
+          
+        }
+    });
+             
+
+
             }
 
-// datatable for posts 
-var dtb=undefined;
+            // datatable for posts 
+            var dtb = undefined;
 
-function postdtb() { 
-if(dtb == undefined){
-dtb = new DataTable("#posttable",{
-    ajax:{
-        url:"{{route('getposts')}}",
-        data:{"sdate":$("#sdate").val(),"edate":$("#edate").val() }
-    },
-    columns: [
+            function postdtb() {
+
+                if (dtb == undefined) {
+                    dtb = new DataTable("#posttable", {
+                        scrollX: true,
+                        searching: false,
+                        "paging": true,
+                        "pageLength": 10,
+                        buttons: [
         {
-            data: '#',
-            render:function(data,type,row){return data.meta + 1 ;  }},
-        {data: 'title_en',render:function(data,type,row) {
-            return `<input type='text' value='${data.title_en}' id='titleen${row.id}' />`;
-        }},
-        {data: 'title_ar',render:function(data,type,row) {
-            return `<input type='text' value='${data.title_ar}' id='titlear${row.id}' />`;
-        }},
-        {data: 'title_kr',render:function(data,type,row) {
-            return `<input type='text' value='${data.title_kr}' id='titlekr${row.id}' />`;
-        }},
-        
-        
-        {data: 'body_en',render:function(data,type,row) {
-            return `<input type='text' value='${data.body_en}' id='bodyen${row.id}' />`;
-        }},
-        {data: 'body_ar',render:function(data,type,row) {
-            return `<input type='text' value='${data.body_ar}' id='bodyar${row.id}' />`;
-        }},
-        {data: 'body_kr',render:function(data,type,row) {
-            return `<input type='text' value='${data.body_kr}' id='bodykr${row.id}' />`;
-        }},
-        
-  
+            text: 'Reload',
+            action: function ( e, dt, node, config ) {
+                dt.ajax.reload();
+            }
+        }
+    ],
+                        ajax: {
+                            url: "{{ route('getposts') }}",
+                            data: {
+                                "sdate": $("#sdate").val(),
+                                "edate": $("#edate").val()
+                            },
+                            type:'post'
+                        },
+                        columns: [
+                            {
+                                data: '#',
+                                render: function(data, type, row,meta) {
+                                
+                                    return meta.row + 1;
+                                }
+                            },
+                            {
+                                data: 'title_en',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.title_en}' id='titleen${row.id}' />`;
+                                }
+                            },
+                            {
+                                data: 'title_ar',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.title_ar}' id='titlear${row.id}' />`;
+                                }
+                            },
+                            {
+                                data: 'title_kr',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.title_kr}' id='titlekr${row.id}' />`;
+                                }
+                            },
 
 
-        {data: 'extralink',render:function(data,type,row){return `<input type='text' value='${data.extralink}' id='extralink${row.id}'  />`;}},
-        {data: 'youtube',render:function(data,type,row){return `<input type='text' value='${data.youtube}' id='youtube${row.id}'  />`;}},
-        
-        {data: 'note',render:function(data,type,row){return `<input type='text' value='${data.note}' id='note${row.id}'  />`;}},
-        
-        {data: 'img',render:function(){return `<input type='file'  id='img${row.id}' />`;}},
-        
-        {data: 'action',render:function (data,type,row) {
-            return `<div> 
+                            {
+                                data: 'body_en',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.body_en}' id='bodyen${row.id}' />`;
+                                }
+                            },
+                            {
+                                data: 'body_ar',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.body_ar}' id='bodyar${row.id}' />`;
+                                }
+                            },
+                            {
+                                data: 'body_kr',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.body_kr}' id='bodykr${row.id}' />`;
+                                }
+                            },
+                            {
+                                data: 'extralink',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.extralink}' id='extralink${row.id}'  />`;
+                                }
+                            },
+                            {
+                                data: 'youtube',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.youtube}' id='youtube${row.id}'  />`;
+                                }
+                            },
+
+                            {
+                                data: 'note',
+                                render: function(data, type, row) {
+                                    return `<input type='text' value='${row.note}' id='note${row.id}'  />`;
+                                }
+                            },
+
+                            {
+                                data: 'img',
+                                render: function(data,type,row) {
+                                    return `<input type='file'  id='img${row.id}' />`;
+                                }
+                            },
+
+                            {
+                                data: 'action',
+                                render: function(data, type, row) {
+                                    return `<div class='flex flex-col gap-2'> 
                 <button onclick="updatepost('${row.id}')" class='p-3 bg-blue-500 hover:bg-green-500 rounded-lg'> update </button> 
                 <button onclick="deletepost('${row.id}')" class='p-3 bg-red-500 hover:text-white-500 rounded-lg'> delete </button> 
                   </div>`;
-        }},
-        
+                                }
+                            },
 
 
 
 
-    ]
-});
 
-}else{
-dtb.ajax.reload();
+                        ]
+                    });
 
-}
+                } else {
+                    dtb.ajax.reload();
 
- }
+                }
+
+            }
 
 
 
             function deletepost(id) {
-$.post("{{route('deletepost')}}",{"id":id},(data)=> {
-    if(data[1]){
-        alert("success");
-    }else{
-        alert("fail");
+            
+                $.confirm({
+        title: "{{__('ap.newposttitle')}}",
+        content: "{{__('ap.newpostinsert')}}",
+        useBootstrap: false,
+    buttons: {
+        confirm: function () {
+            $.post("{{ route('deletepost') }}", {
+                    "id": id
+                }, (data) => {
+                    if (data[1]) {
+                        $.alert({
+    title: 'Operation Alert !',
+    content: 'Success!',
+});
+                    } else {
+                        $.alert({
+    title: 'Operation Alert !',
+    content: 'Failed!',
+});
 
+                    }
+                });
+
+        },
+        cancel: function () {
+            $.alert('Canceled!');
+        },
+      
     }
 });
-    
-}
 
-function updatepost(id){
-    
-    let data = new FormData();
+
+            }
+
+            function updatepost(id) {
+
+                let data = new FormData();
                 let files = $(`#img${id}`)[0].files[0];
 
                 data.append("titleen", $(`#titleen${id}`).val());
@@ -240,6 +344,13 @@ function updatepost(id){
                     data.append("img", files);
                 }
 
+
+                $.confirm({
+        title: "{{__('ap.newposttitle')}}",
+        content: "{{__('ap.newpostinsert')}}",
+        useBootstrap: false,
+        buttons: {
+            confirm: function () {
                 $.ajax({
                     url: "{{ route('newpost') }}",
                     type: 'post',
@@ -248,14 +359,32 @@ function updatepost(id){
                     processData: false,
                     success: function(response) {
                         if (response[1]) {
-                            alert("success");
+                            $.alert({
+    title: 'Operation Alert !',
+    content: 'Success!',
+});
                         } else {
-                            alert('failed');
+                            $.alert({
+    title: 'Operation Alert !',
+    content: 'Failed!',
+});
                         }
                     },
-                });
-}
+                });                       
+              
 
+
+            },
+            cancel: function () {
+                $.alert('Canceled!');
+            },
+          
+        }
+    });
+             
+
+             
+            }
         </script>
 
 
