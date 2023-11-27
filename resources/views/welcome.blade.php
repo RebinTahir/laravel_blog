@@ -8,6 +8,7 @@
 
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{asset('jquery/dist/jquery.js')}}"></script>
 
        
     </head>
@@ -33,7 +34,40 @@
 function loadmorenews(){
 alert("we are workig on it");
 }
+
+
+function english() { 
+    $.get("{{route('english')}}",function(data,status){
+if(data == true){
+window.location.reload();
+
+}
+    });
+ }
+ 
+
+function arabic() { 
+    $.get("{{route('arabic')}}",function(data,status){
+if(data == true){
+window.location.reload();
+}
+    });
+ }
+
+function kurdish() { 
+    $.get("{{route('kurdish')}}",function(data,status){
+if(data == true){
+window.location.reload();
+}
+    });
+ }
+
+
+
 </script>
+
+
+
 
 
     </body>

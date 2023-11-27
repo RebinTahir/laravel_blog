@@ -2,7 +2,7 @@
  <aside id="logo-sidebar" class=" h-full hidden md:block mr-3" aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800  dark:bg-green-500 text-white dark:text-black">
        <a href="{{route('home')}}" class="flex items-center pl-2.5 mb-5">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-7" />
+          <img src="{{asset('imgs/logo.jpg')}}" class="h-6 mr-3 sm:h-7" />
           <span class="self-center text-xl  font-extrabold whitespace-nowrap dark:text-white">{{__("ap.appname")}}</span>
        </a>
 

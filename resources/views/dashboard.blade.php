@@ -83,7 +83,7 @@
                             <th>#</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-slate-400 p-3"></tbody>
+                    <tbody class="bg-slate-400 p-3 "></tbody>
 
                 </table>
 
@@ -119,42 +119,58 @@
                 }
 
                 $.confirm({
-        title: "{{__('ap.newposttitle')}}",
-        content: "{{__('ap.newpostinsert')}}",
-        useBootstrap: false,
-        buttons: {
-            confirm: function () {
+                    title: "{{ __('ap.newposttitle') }}",
+                    content: "{{ __('ap.newpostinsert') }}",
+                    theme: 'dark',
+                    type: 'blue',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                    useBootstrap: false,
+                    buttons: {
+                        confirm: function() {
+
+                            $.ajax({
+                                url: "{{ route('newpost') }}",
+                                type: 'post',
+                                data: data,
+                                contentType: false,
+                                processData: false,
+                                
+                                success: function(response) {
+                                    if (response[1]) {
+                                        $.alert({
+                                            title: 'Operation Alert !',
+                                            content: 'Success!',
+                                            useBootstrap: false,
+                    theme: 'dark',
+                    type: 'green',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
                                        
-                $.ajax({
-                    url: "{{ route('newpost') }}",
-                    type: 'post',
-                    data: data,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        if (response[1]) {
-                            $.alert({
-    title: 'Operation Alert !',
-    content: 'Success!',
-});
-                        } else {
-                            $.alert({
-    title: 'Operation Alert !',
-    content: 'Failed!',
-});
-                        }
-                    },
+                                        });
+                                    } else {
+                                        $.alert({
+                                            title: 'Operation Alert !',
+                                            content: 'Failed!',
+                                            useBootstrap: false,
+                    theme: 'dark',
+                    type: 'red',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                                        });
+                                    }
+                                },
+                            });
+
+
+                        },
+                        cancel: function() {
+                            $.alert('Canceled!');
+                        },
+
+                    }
                 });
 
-
-            },
-            cancel: function () {
-                $.alert('Canceled!');
-            },
-          
-        }
-    });
-             
 
 
             }
@@ -165,32 +181,39 @@
             function postdtb() {
 
                 if (dtb == undefined) {
+
+                    if ($("#sdate").val().length < 5 || $("#edate").val().length < 5) {
+                        $.alert({
+                            title: 'Data is missing !',
+                            content: 'please choose start date and end date.',
+                        });
+
+                        return;
+                    }
+
                     dtb = new DataTable("#posttable", {
                         scrollX: true,
                         searching: false,
                         "paging": true,
                         "pageLength": 10,
-                        buttons: [
-        {
-            text: 'Reload',
-            action: function ( e, dt, node, config ) {
-                dt.ajax.reload();
-            }
-        }
-    ],
+                        buttons: [{
+                            text: 'Reload',
+                            action: function(e, dt, node, config) {
+                                dt.ajax.reload();
+                            }
+                        }],
                         ajax: {
                             url: "{{ route('getposts') }}",
                             data: {
                                 "sdate": $("#sdate").val(),
                                 "edate": $("#edate").val()
                             },
-                            type:'post'
+                            type: 'post'
                         },
-                        columns: [
-                            {
+                        columns: [{
                                 data: '#',
-                                render: function(data, type, row,meta) {
-                                
+                                render: function(data, type, row, meta) {
+
                                     return meta.row + 1;
                                 }
                             },
@@ -254,7 +277,7 @@
 
                             {
                                 data: 'img',
-                                render: function(data,type,row) {
+                                render: function(data, type, row) {
                                     return `<input type='file'  id='img${row.id}' />`;
                                 }
                             },
@@ -286,37 +309,51 @@
 
 
             function deletepost(id) {
-            
+
                 $.confirm({
-        title: "{{__('ap.newposttitle')}}",
-        content: "{{__('ap.newpostinsert')}}",
-        useBootstrap: false,
-    buttons: {
-        confirm: function () {
-            $.post("{{ route('deletepost') }}", {
-                    "id": id
-                }, (data) => {
-                    if (data[1]) {
-                        $.alert({
-    title: 'Operation Alert !',
-    content: 'Success!',
-});
-                    } else {
-                        $.alert({
-    title: 'Operation Alert !',
-    content: 'Failed!',
-});
+                    title: "{{ __('ap.newposttitle') }}",
+                    content: "{{ __('ap.newpostinsert') }}",
+                    useBootstrap: false,
+                    theme: 'dark',
+                    type: 'red',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                    buttons: {
+                        confirm: function() {
+                            $.post("{{ route('deletepost') }}", {
+                                "id": id
+                            }, (data) => {
+                                if (data[1]) {
+                                    $.alert({
+                                        title: 'Operation Alert !',
+                                        content: 'Success!',
+                                        useBootstrap: false,
+                    theme: 'dark',
+                    type: 'green',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                                    });
+                                } else {
+                                    $.alert({
+                                        title: 'Operation Alert !',
+                                        content: 'Failed!',
+                                        useBootstrap: false,
+                    theme: 'dark',
+                    type: 'red',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                                    });
+
+                                }
+                            });
+
+                        },
+                        cancel: function() {
+                            $.alert('Canceled!');
+                        },
 
                     }
                 });
-
-        },
-        cancel: function () {
-            $.alert('Canceled!');
-        },
-      
-    }
-});
 
 
             }
@@ -346,44 +383,58 @@
 
 
                 $.confirm({
-        title: "{{__('ap.newposttitle')}}",
-        content: "{{__('ap.newpostinsert')}}",
-        useBootstrap: false,
-        buttons: {
-            confirm: function () {
-                $.ajax({
-                    url: "{{ route('newpost') }}",
-                    type: 'post',
-                    data: data,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        if (response[1]) {
-                            $.alert({
-    title: 'Operation Alert !',
-    content: 'Success!',
-});
-                        } else {
-                            $.alert({
-    title: 'Operation Alert !',
-    content: 'Failed!',
-});
-                        }
-                    },
-                });                       
-              
+                    title: "{{ __('ap.newposttitle') }}",
+                    content: "{{ __('ap.newpostinsert') }}",
+                    useBootstrap: false,
+                    theme: 'dark',
+                    type: 'blue',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                    buttons: {
+                        confirm: function() {
+                            $.ajax({
+                                url: "{{ route('newpost') }}",
+                                type: 'post',
+                                data: data,
+                                contentType: false,
+                                processData: false,
+                                success: function(response) {
+                                    if (response[1]) {
+                                        $.alert({
+                                            title: 'Operation Alert !',
+                                            content: 'Success!',
+                                            useBootstrap: false,
+                    theme: 'dark',
+                    type: 'green',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                                        });
+                                    } else {
+                                        $.alert({
+                                            title: 'Operation Alert !',
+                                            content: 'Failed!',
+                                            useBootstrap: false,
+                    theme: 'dark',
+                    type: 'red',
+                    columnClass: 'w-20',
+                    typeAnimated: true,
+                                        });
+                                    }
+                                },
+                            });
 
 
-            },
-            cancel: function () {
-                $.alert('Canceled!');
-            },
-          
-        }
-    });
-             
 
-             
+                        },
+                        cancel: function() {
+                            $.alert('Canceled!');
+                        },
+
+                    }
+                });
+
+
+
             }
         </script>
 

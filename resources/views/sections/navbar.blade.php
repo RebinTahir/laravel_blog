@@ -46,7 +46,20 @@
                     </g>
                 </svg>
                 {{-- chosen language --}}
-                English (US)
+                
+                <span id="chosenlang">
+
+                    @if(App::getLocale() == "en")
+                    English (US)
+                    @elseif(App::getLocale() == "ar")
+                    Arabic (AR)
+                    @elseif(App::getLocale() == "kr")
+                    Kurdish (KR)
+                    @endif
+                    
+                </span>
+
+
             </button>
             <!-- language Dropdown -->
             <div class="z-50 my-4 hidden list-none divide-y divide-gray-100 rounded-lg bg-white text-base shadow dark:bg-gray-700"
@@ -55,8 +68,9 @@
 
                 <ul class="py-2 font-medium" role="none">
                     <li>
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+                        <button onclick="english()"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400
+                             dark:hover:bg-gray-600 dark:hover:text-white"
                             role="menuitem">
                             <div class="inline-flex items-center">
                                 <svg aria-hidden="true" class="mr-2 h-3.5 w-3.5 rounded-full"
@@ -78,10 +92,10 @@
                                 </svg>
                                 English (US)
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#"
+                        <button onclick="arabic()"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                             role="menuitem">
                             <div class="inline-flex items-center">
@@ -93,10 +107,10 @@
                                 </svg>
                                 Arabic
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li>
-                        <a href="#"
+                        <button onclick="kurdish()"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                             role="menuitem">
                             <div class="inline-flex items-center">
@@ -110,7 +124,7 @@
                                 </svg>
                                 Kurdish
                             </div>
-                        </a>
+                        </button>
                     </li>
 
 

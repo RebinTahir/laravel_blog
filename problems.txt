@@ -1,0 +1,3 @@
+1- because this app does not support (not use) Bootstrap we have problems with jquery confirm (we set a class in layout/app.blade.php  file
+to solve this issues temporarly)
+2- and because of same problem we have some design issues in jquery datatable

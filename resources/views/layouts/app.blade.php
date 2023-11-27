@@ -12,7 +12,16 @@
         <script src="{{asset('jquery/dist/jquery.js')}}"></script>
         <script src="{{asset('datatables.net/js/jquery.dataTables.js')}}"></script>
         <script src="{{asset('jquery-confirm/dist/jquery-confirm.min.js')}}"></script>
+       {{-- this styles are effeting jquery confirm  --}}
+       <style>
+        .jc-bs3-container{
+            width: 45%;
+  margin-right: auto;
+  margin-left: auto;
+        }
+
         
+        </style> 
 <link rel="stylesheet" href="{{asset('jquery-confirm/dist/jquery-confirm.min.css')}}">
     </head>
     <body class="font-sans antialiased">

@@ -4,18 +4,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
     use HasFactory;
-    protected $appends =["title","body"];
+    protected $appends =["title","body","myimg"];
 public function getTitleAttribute(){
-    $lang = "title_".config("app.locale");
+    $lang = "title_".App::getLocale();
     return $this->$lang;
 }
 public function getBodyAttribute(){
-    $lang = "body_".config("app.locale");
+    $lang = "body_".App::getLocale();
+    
     return $this->$lang;
 }
+
+
+
+
+public function getMyimgAttribute()
+{
+    return $this->getImg();
+}
+
+
+
+public function getImg()
+{
+    $file = asset("storage/" . $this->img);
+    return $file;
+}
+
 
 }
