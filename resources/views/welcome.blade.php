@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{__("ap.appname")}}</title>
 
 
@@ -30,39 +30,37 @@
 
 <script>
 
+$(document).ready(function() {
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+});
+
+
+
+
+function mtranslate(lang ="") { 
+    if(lang.length == 2){
+
+        $.post(`{{route('translate')}}`,{"lang":lang},function(data,status){
+            if(data == true){
+                window.location.reload();           
+            }
+        });
+    }
+ }
+ 
+
+
+
+
+
 // load more news  
 function loadmorenews(){
 alert("we are workig on it");
 }
-
-
-function english() { 
-    $.get("{{route('english')}}",function(data,status){
-if(data == true){
-window.location.reload();
-
-}
-    });
- }
- 
-
-function arabic() { 
-    $.get("{{route('arabic')}}",function(data,status){
-if(data == true){
-window.location.reload();
-}
-    });
- }
-
-function kurdish() { 
-    $.get("{{route('kurdish')}}",function(data,status){
-if(data == true){
-window.location.reload();
-}
-    });
- }
-
-
 
 </script>
 

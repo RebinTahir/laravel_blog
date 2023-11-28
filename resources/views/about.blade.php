@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ __('ap.appname') }}</title>
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{asset('jquery/dist/jquery.js')}}"></script>
 
 
 </head>
@@ -31,7 +33,30 @@
     </div>
 
 
+<script>
+    $(document).ready(function() {
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+});
 
+
+
+
+function mtranslate(lang ="") { 
+    if(lang.length == 2){
+
+        $.post(`{{route('translate')}}`,{"lang":lang},function(data,status){
+            if(data == true){
+                window.location.reload();           
+            }
+        });
+    }
+ }
+ 
+</script>
 
 </body>
 

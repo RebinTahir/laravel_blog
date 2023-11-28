@@ -1,3 +1,14 @@
-1- because this app does not support (not use) Bootstrap we have problems with jquery confirm (we set a class in layout/app.blade.php  file
+note: 
+---problems are numbered by using a number in braclets ()  like (55)  
+the lower the number the most dangerous problem will be.
+---(Z) sign define errors  that is related to design and does not effect the operation of application  
+
+
+
+1- (Z) because this app does not support (not use) Bootstrap we have problems with jquery confirm (we set a class in layout/app.blade.php  file
 to solve this issues temporarly)
-2- and because of same problem we have some design issues in jquery datatable
+
+2- (Z) and because of same problem we have some design issues in jquery datatable
+
+3- (A) security and data cheking is not provided in Controllers (Postcontroller) require series consideration to validate the user data.
+

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -12,10 +14,17 @@ class PostController extends Controller
     public function showpost($id)
     {
 
-        // $data =  Post::find($id);    
-        // return view("sections.subject",compact("data"));
+        if( is_numeric($id) && $id > 0){
+if(Session::has('locale')){
+    App::setLocale(Session::get("locale",App::getLocale()));
 
-        return view("sections.subject");
+}
+            $data =  Post::find($id);    
+            return view("sections.subject",compact("data"));
+        }
+        return abort(404); 
+
+        
     }
 
     // save post

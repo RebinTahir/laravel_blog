@@ -9,28 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 class LanguageController extends Controller
 {
     //
-
-    public function english(){
-        App::setLocale("en");
-        session()->put('locale', "en");
-        
-        return true;
-    }
-    public function arabic(){
-        App::setLocale("ar");
-        session()->put('locale', "ar");
-        
-
+// to translate to specifif clang 
+    public function translate(){
+        $lang = request("lang");
+        App::setLocale($lang);
+        session()->put('locale', $lang);
         return true;
     }
 
-
-    public function kurdish(){
-        App::setLocale("kr");
-        session()->put('locale', "kr");
-        
-
-        return true;
-    }
-
+    
 }
