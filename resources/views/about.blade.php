@@ -18,7 +18,9 @@
 <body class="antialiased bg-amber-400">
 
     <div class="flex h-screen flex-col justify-between  gap-3">
-        @include('sections.navbar')
+        <div class="p-5">
+            @include('sections.navbar')
+        </div>
 
         <h1 class="bg-gray-800 p-5 text-center font-extrabold text-white"> {{ __('ap.appname') }}</h1>
 

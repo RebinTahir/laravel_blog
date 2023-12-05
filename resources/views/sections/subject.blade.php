@@ -26,7 +26,7 @@
 
 
             @if (!is_null($data))
-                <main class="bg-white pb-16 pt-8 antialiased dark:bg-gray-900 lg:pb-24 lg:pt-16">
+                <main class="bg-white pb-16 pt-8 antialiased dark:bg-gray-900 lg:pb-24 lg:pt-16 h-screen">
                     <div class="mx-auto flex max-w-screen-xl  px-4 flex-col justify-center items-center">
                         <img src="{{$data->myimg}}" class="mb-5 rounded-lg w-28" alt="Image 2">
 
@@ -37,9 +37,6 @@
                      <h2> {!! $data->title !!}</h2>
                          
                      <p class="px-5"> {!! $data->body !!}</p>
-
-
-
                         </article>
                     </div>
                 </main>

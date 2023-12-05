@@ -1,6 +1,6 @@
 <h2 class="my-2 w-full rounded-lg bg-amber-300 p-5 text-center font-extrabold text-black">Latest News</h2>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-2 px-10">
 
 
 
@@ -8,7 +8,7 @@
         {{-- this is post body --}}
         <article class="max-w-xs">
             
-          <a href="{{route('information',['id'=>$post->id])}}">
+          <a href="{{$post->mylink}}">
 
               @if($post->img != "null")
               <img src="{{$post->myimg}}" class="mb-5 rounded-lg w-28" alt="Image 2">
@@ -19,6 +19,12 @@
 <hr class="bg-gray-200 h-1"/>
 
     @endforeach
+<div id="extracontent">
+
+</div>
+
+
+
 
     <div class="rounded-lg bg-amber-300 p-5 text-center text-black hover:bg-blue-500 hover:text-white">
         <button onclick="loadmorenews()" class="h-full w-full">{{ __('ap.loadmore') }}</button>

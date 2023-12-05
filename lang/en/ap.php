@@ -27,7 +27,8 @@ return [
 
 // sidebars
 "lessons"=>"Lesson's",
-"mainsubjects"=>"Main Subjects",
+"mainsubjects"=>"Main Subjects ",
+
 "loadmore"=>"Loan More ...",
 "datanotfound"=>"Sorry Data Not Found",
 "suggestedposts"=>"Suggested Popular Posts",

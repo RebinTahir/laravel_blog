@@ -9,11 +9,18 @@ use Illuminate\Support\Facades\App;
 class Post extends Model
 {
     use HasFactory;
-    protected $appends =["title","body","myimg"];
+    protected $appends =["title","body","myimg","mylink"];
 public function getTitleAttribute(){
     $lang = "title_".App::getLocale();
     return $this->$lang;
 }
+public function getMylinkAttribute(){
+    
+$link = route("information",["id"=>$this->id]);
+    return $link;
+}
+
+
 public function getBodyAttribute(){
     $lang = "body_".App::getLocale();
     

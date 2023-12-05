@@ -13,6 +13,7 @@ Route::get('/information/{id}', [App\Http\Controllers\PostController::class,"sho
 Route::post('/newpost', [App\Http\Controllers\PostController::class,"savepost"] )->middleware("auth")->name("newpost");
 Route::post('/deletepost', [App\Http\Controllers\PostController::class,"deletepost"] )->middleware("auth")->name("deletepost");
 Route::post('/getposts', [App\Http\Controllers\PostController::class,"getposts"] )->middleware("auth")->name("getposts");
+Route::post('/moredata', [App\Http\Controllers\PostController::class,"moredata"] )->name("moredata");
 
 Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
 

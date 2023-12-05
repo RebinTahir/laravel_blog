@@ -91,4 +91,15 @@ if(Session::has('locale')){
             return [false, false];
         }
     }
+
+    // to get data from specific id and above
+public function moredata(){
+    $fromid = request("id");
+    if( is_numeric($fromid) && $fromid > 0){
+
+        $data = Post::where("id",">",$fromid)->limit(15)->get(); 
+        return $data;
+    }
+}
+
 }
