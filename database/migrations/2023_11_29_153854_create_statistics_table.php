@@ -13,13 +13,26 @@ return new class extends Migration
     {
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
-            $table->string("ip");// user ip address
-            $table->string("date");// time of visit seconds are also created    
-            $table->string("url"); // the link user navigate to it 
-            $table->string("post_id"); // the post user request it  
-            $table->string("user_agent"); // information about user device (Operating system ... )
+            //ip  user ip address
+            //date  time of visit seconds are also created    
+            //url  the link user navigate to it 
+            //post_id  the post user request it  
+            //user_agent information about user device (Operating system ... )
 // The User-Agent request header is a characteristic string that lets 
 // servers and network peers identify the application, operating system, vendor, and/or version of the requesting
+// device  desktop , tablet, phone
+
+$table->string("ip");
+$table->string("date");
+$table->string("url");
+$table->string("post_id");
+$table->string("user_agent");
+$table->string("browser");
+$table->string("isrobot");
+$table->string("browser");
+$table->string("device");
+$table->string("operatingsystem");
+
 
             $table->timestamps();
         });

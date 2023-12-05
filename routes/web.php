@@ -16,7 +16,6 @@ Route::post('/getposts', [App\Http\Controllers\PostController::class,"getposts"]
 Route::post('/moredata', [App\Http\Controllers\PostController::class,"moredata"] )->name("moredata");
 
 Route::get('/dashboard', function () {return view('dashboard');})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::post('/translate', [App\Http\Controllers\LanguageController::class,"translate"])->name('translate');
 
 Route::middleware('auth')->group(function () {

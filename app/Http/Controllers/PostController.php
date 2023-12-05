@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Statistic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use Jenssegers\Agent\Facades\Agent;
 class PostController extends Controller
 {
 
@@ -20,6 +22,52 @@ if(Session::has('locale')){
 
 }
             $data =  Post::find($id);    
+ 
+ 
+// we need to track who visit our site
+
+$browser = Agent::browser();
+
+$browserversion = Agent::version($browser);
+$operatingsystem = Agent::platform();
+
+
+//  related to os
+$platform = Agent::platform();
+$osversion = Agent::version($platform); 
+
+// detect robots
+$isrobot = Agent::isRobot();
+$agent = request()->header('user-agent');
+$device = "Desktop";
+if(Agent::isTablet()){
+$device = "Tablet";
+}
+if(Agent::isPhone()){
+    $device="Phone";
+}
+
+
+Statistic::create([
+    "ip"=>  request()->ip(),
+    "date"=> Carbon::now() ,
+    "url"=> "welcome", 
+    "post_id"=> $data->id,
+    "user_agent"=>$agent ,
+    "browser"=>$browser ,
+    "isrobot"=>$isrobot ,
+    "browser"=>$browserversion ,
+    "device"=>$device,  // user device
+    "operatingsystem"=>$operatingsystem,  // user device
+
+]);
+
+// finish statistics
+
+ 
+ 
+ 
+ 
             return view("sections.subject",compact("data"));
         }
         return abort(404); 
