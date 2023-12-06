@@ -1,6 +1,6 @@
-<h2 class="my-2 w-full rounded-lg bg-amber-300 p-5 text-center font-extrabold text-black">Latest News</h2>
+<h2 class="my-2 w-full rounded-lg  p-5 text-center font-extrabold text-black">Latest News</h2>
 
-<div class="flex flex-col gap-2 px-10">
+<div class="flex flex-col gap-2 px-10 h-screen ">
 
 
 
@@ -26,7 +26,7 @@
 
 
 
-    <div class="rounded-lg bg-amber-300 p-5 text-center text-black hover:bg-blue-500 hover:text-white">
+    <div class="rounded-lg p-5 text-center text-black hover:text-blue-500 ">
         <button onclick="loadmorenews()" class="h-full w-full">{{ __('ap.loadmore') }}</button>
 
     </div>

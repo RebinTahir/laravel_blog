@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Statistic extends Model
 {
     use HasFactory;
+
+
+    protected $fillable=[
+        "ip",
+        "date",
+        "url",
+        "post_id",
+        "user_agent",
+        "isrobot",
+        "browser",
+        "device",
+        "operatingsystem"
+
+    ];
 }

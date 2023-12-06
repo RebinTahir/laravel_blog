@@ -27,7 +27,6 @@ $table->string("date");
 $table->string("url");
 $table->string("post_id");
 $table->string("user_agent");
-$table->string("browser");
 $table->string("isrobot");
 $table->string("browser");
 $table->string("device");

@@ -17,18 +17,17 @@
 <body class="antialiased">
 
     <div class="grid grid-cols-5">
-        <div class="col-span-1 hidden w-full md:col-span-1 md:block">@include('sections.sidebar')</div>
 
-        <div class="col-span-5 mb-5 px-5 md:col-span-4 ">
-<div class=" p-4 ">
-    @include('sections.navbar')
+        <div class="col-span-5 mb-5 px-5 ">
+            <div class="p-4">
+                @include('sections.navbar')
 
-</div>
+            </div>
 
-<div class="">
-    @include('sections.content')
+            <div class="">
+                @include('sections.content')
 
-</div>
+            </div>
 
         </div>
         <div class="order-last col-span-5"> @include('sections.footer') </div>

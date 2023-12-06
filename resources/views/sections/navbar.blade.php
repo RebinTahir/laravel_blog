@@ -11,8 +11,10 @@
             </svg>
         </button>
 
+
+
         {{-- shown on small screens only --}}
-        <h1 class="inline font-extrabold text-black md:hidden">{{ __('ap.appname') }}</h1>
+        <h1 class="inline font-extrabold text-black ">{{ __('ap.appname') }}</h1>
 
         <div class="flex items-center md:order-2 bg-slate-200">
             <button type="button" data-dropdown-toggle="language-dropdown-menu"
